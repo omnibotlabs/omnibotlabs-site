@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="__variable_f367f3 __variable_dd5b2f __variable_3c557b light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery · Omnibot labs</title>
+<meta name="description" content="A look inside the Omnibot labs workshop — builds, boards, and demo days.">
+<link rel="stylesheet" href="_next/static/css/2616ca26a6204063.css">
+<link rel="stylesheet" href="_next/static/css/dark-theme.css">
+<style>
+body{background:var(--color-paper);color:var(--color-ink)}
+.gallery-hero{max-width:72rem;margin:0 auto;padding:9rem 1.5rem 1rem}
+.lab-gallery-section{padding:2rem 0 5rem}
+.lab-gallery-inner{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+.lab-gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:1rem;margin-top:2rem}
+.lab-gallery .lg-item{position:relative;grid-column:span 1;grid-row:span 1;border-radius:1rem;overflow:hidden;cursor:pointer;background:#ddd8cc;border:0;padding:0;display:block;width:100%;height:100%}
+.lab-gallery .lg-item.span-2x2{grid-column:span 2;grid-row:span 2}
+.lab-gallery .lg-item.span-full{grid-column:1/-1}
+.lab-gallery .lg-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.lab-gallery .lg-item:hover img,.lab-gallery .lg-item:focus-visible img{transform:scale(1.06)}
+.lab-gallery .lg-item:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+.lab-gallery .lg-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:.6rem .75rem;font-size:.78rem;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.55),transparent);text-align:left}
+@media (max-width:768px){
+.lab-gallery{grid-template-columns:1fr;grid-auto-rows:220px}
+.lab-gallery .lg-item{grid-column:span 1!important;grid-row:span 1!important}
+}
+.lab-lightbox{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(10,10,10,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.lab-lightbox.is-open{opacity:1;pointer-events:auto}
+.lab-lightbox figure{max-width:56rem;width:100%;margin:0;transform:scale(.96);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.lab-lightbox.is-open figure{transform:scale(1)}
+.lab-lightbox img{width:100%;max-height:70vh;object-fit:cover;border-radius:1rem;display:block}
+.lab-lightbox figcaption{margin-top:.75rem;text-align:center;font-size:.9rem;color:#f2f2f2}
+.lab-lightbox .lab-close{position:absolute;top:1.25rem;right:1.25rem;width:2.5rem;height:2.5rem;border-radius:9999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer}
+.lab-close:hover{background:rgba(255,255,255,.22)}
+.glow-box{position:relative}
+.glow-box::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;opacity:0;pointer-events:none;transition:opacity .3s ease;background:conic-gradient(from calc(var(--glow-angle,0) * 1deg) at 50% 50%,#dd7bbb,#d79f1e,#5a922c,#4c7894,#dd7bbb);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.glow-box.glow-active::after{opacity:1}
+@media (prefers-reduced-motion:reduce){.glow-box::after{display:none}}
+.reveal-io{opacity:0;transform:translateY(14px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.reveal-io.is-in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+.lab-gallery .lg-item img{transition:none}
+.lab-lightbox,.lab-lightbox figure{transition:none}
+.reveal-io{opacity:1!important;transform:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-transparent"><nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6"><a class="flex items-center gap-2" aria-label="Omnibot labs home" href="index.html"><svg viewBox="0 0 160 160" width="34" height="34" aria-hidden="true"><g transform="translate(24,24)"><rect x="0" y="0" width="112" height="30" rx="10" fill="#2563eb"></rect><rect x="0" y="41" width="82" height="30" rx="10" fill="#ff4d6d"></rect><rect x="0" y="82" width="30" height="30" rx="10" fill="#ffb703"></rect><circle cx="97" cy="97" r="15" fill="#10d9a3"></circle></g></svg><span class="font-display text-xl font-bold tracking-tight">Omnibot <span class="text-blue">labs</span></span></a><div class="hidden items-center gap-6 lg:flex"><a class="text-sm font-medium text-ink-soft transition-colors hover:text-ink" href="ladder.html">The Ladder</a><a class="text-sm font-medium text-ink-soft transition-colors hover:text-ink" href="capstones.html">Capstones</a><a class="text-sm font-medium text-ink-soft transition-colors hover:text-ink" href="threads.html">Skill Threads</a><a class="text-sm font-medium text-ink-soft transition-colors hover:text-ink" href="philosophy.html">Philosophy</a><a class="text-sm font-medium text-ink-soft transition-colors hover:text-ink" href="curriculum.html">Curriculum</a><a class="text-sm font-medium text-ink" href="gallery.html" aria-current="page">Gallery</a><a class="btn-block rounded-xl bg-ink px-4 py-2 text-sm font-semibold text-paper" href="signup.html">Contact Us</a><button type="button" id="theme-toggle" aria-label="Toggle dark mode" class="rounded-full border border-ink/15 px-2 py-1 text-base leading-none">🌙</button></div><button class="lg:hidden" aria-expanded="false" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></button></nav></header>
+<main>
+<section class="gallery-hero reveal-io">
+<h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Inside the lab</h1>
+<p class="mt-3 max-w-xl text-ink-soft">A few moments from the workshop floor — placeholders for now, until real build-day photos are in.</p>
+</section>
+<section class="lab-gallery-section reveal-io">
+<div class="lab-gallery-inner">
+<div class="lab-gallery" id="lab-gallery"></div>
+</div>
+</section>
+</main>
+<footer class="border-t border-ink/10 bg-studs-dark text-paper"><div class="mx-auto max-w-6xl px-4 py-16 sm:px-6"><div class="rounded-2xl bg-ink/40 p-8 text-center sm:p-12 glow-box"><h2 class="font-display text-2xl font-bold sm:text-3xl">Ready to put your child on the ladder?</h2><p class="mx-auto mt-3 max-w-md text-paper/80">Join a free demo class. Build something real in the first 45 minutes — that's a promise.</p><a class="btn-block mt-6 inline-block rounded-xl bg-amber px-6 py-3 text-sm font-semibold text-ink" href="signup.html">Book a free demo class</a></div><div class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4"><div><a class="flex items-center gap-2" aria-label="Omnibot labs home" href="index.html"><span class="font-display text-lg font-bold">Omnibot <span class="text-blue">labs</span></span></a><p class="mt-3 max-w-xs text-sm text-paper/70">The Builder's Ladder: 10 years of robotics, coding, and AI, grades 3-12.</p></div><div><h3 class="text-sm font-semibold text-paper/90">The Ladder</h3><ul class="mt-3 space-y-2 text-sm text-paper/70"><li><a class="hover:text-paper" href="ladder.html">The Ladder</a></li><li><a class="hover:text-paper" href="capstones.html">Capstones</a></li><li><a class="hover:text-paper" href="threads.html">Skill Threads</a></li><li><a class="hover:text-paper" href="gallery.html">Gallery</a></li></ul></div><div><h3 class="text-sm font-semibold text-paper/90">For families</h3><ul class="mt-3 space-y-2 text-sm text-paper/70"><li><a class="hover:text-paper" href="philosophy.html">Philosophy</a></li><li><a class="hover:text-paper" href="curriculum.html">Curriculum</a></li><li><span class="text-paper/40">Teacher guide (in package)</span></li><li><span class="text-paper/40">Parent guide (in package)</span></li></ul></div><div><h3 class="text-sm font-semibold text-paper/90">Contact</h3><ul class="mt-3 space-y-2 text-sm text-paper/70"><li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>hello@omnibotlabs.com</li><li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Hyderabad, India</li></ul></div></div><div class="mt-12 border-t border-paper/10 pt-6 text-center text-xs text-paper/50">© 2026 Omnibot labs · Build. Code. Think. · Where builders grow.</div></div></footer>
+<div class="lab-lightbox" id="lab-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+<button class="lab-close" id="lab-close" aria-label="Close photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+<figure><img id="lab-lightbox-img" src="" alt=""><figcaption id="lab-lightbox-caption"></figcaption></figure>
+</div>
+<script>
+(function(){
+var toggle=document.getElementById('theme-toggle');
+if(toggle){
+toggle.addEventListener('click',function(){
+var isDark=document.documentElement.classList.toggle('dark');
+document.documentElement.classList.toggle('light',!isDark);
+toggle.textContent=isDark?'☀️':'🌙';
+});
+}
+
+var photos=[
+{seed:'omnibot-lab-soldering-01',w:900,h:900,cls:'span-2x2',caption:'Wiring the first circuit, Grade 4.'},
+{seed:'omnibot-lab-board-macro',w:500,h:500,cls:'',caption:'Close-up on a soldered board.'},
+{seed:'omnibot-lab-robot-arm',w:500,h:500,cls:'',caption:'A Grade 7 robotic arm mid-build.'},
+{seed:'omnibot-lab-pair-coding',w:500,h:500,cls:'',caption:'Pair programming during lab hours.'},
+{seed:'omnibot-lab-3d-printer',w:500,h:500,cls:'',caption:'Printing chassis parts overnight.'},
+{seed:'omnibot-lab-demo-day',w:1400,h:400,cls:'span-full',caption:'Demo day, families in the room.'}
+];
+var grid=document.getElementById('lab-gallery');
+photos.forEach(function(photo){
+var src='https://picsum.photos/seed/'+photo.seed+'/'+photo.w+'/'+photo.h;
+var btn=document.createElement('button');
+btn.type='button';
+btn.className='lg-item'+(photo.cls?' '+photo.cls:'');
+btn.setAttribute('aria-label','Open photo: '+photo.caption);
+var img=document.createElement('img');
+img.src=src;img.loading='lazy';img.alt=photo.caption;
+var cap=document.createElement('figcaption');
+cap.textContent=photo.caption;
+btn.appendChild(img);btn.appendChild(cap);
+btn.addEventListener('click',function(){openLightbox(src,photo.caption);});
+grid.appendChild(btn);
+});
+
+function openLightbox(src,caption){
+var lb=document.getElementById('lab-lightbox');
+var img=document.getElementById('lab-lightbox-img');
+var cap=document.getElementById('lab-lightbox-caption');
+img.src=src;img.alt=caption;cap.textContent=caption;
+lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');
+document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+var lb=document.getElementById('lab-lightbox');
+lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');
+document.body.style.overflow='';
+}
+document.getElementById('lab-lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.getElementById('lab-close').addEventListener('click',closeLightbox);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+document.querySelectorAll('.glow-box').forEach(function(box){
+box.addEventListener('pointermove',function(e){
+var r=box.getBoundingClientRect();
+var cx=r.left+r.width/2,cy=r.top+r.height/2;
+var angle=(Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI)+90;
+box.style.setProperty('--glow-angle',angle.toFixed(1));
+box.classList.add('glow-active');
+});
+box.addEventListener('pointerleave',function(){box.classList.remove('glow-active');});
+});
+}
+
+if('IntersectionObserver' in window){
+var io=new IntersectionObserver(function(entries){
+entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-in');io.unobserve(entry.target);}});
+},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal-io').forEach(function(el){io.observe(el);});
+}else{
+document.querySelectorAll('.reveal-io').forEach(function(el){el.classList.add('is-in');});
+}
+})();
+</script>
+<style>
+/* Sticky announcement banner */
+#promo-banner{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:center;gap:1rem;min-height:2.75rem;padding:.55rem 2.5rem;background:linear-gradient(90deg,#2563eb,#1d4ed8);color:#fff;text-align:center;font-size:.85rem;transform:translateY(-100%);opacity:0;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s ease}
+#promo-banner.is-shown{transform:translateY(0);opacity:1}
+#promo-banner a{color:#fff;text-decoration:underline;text-underline-offset:2px;font-weight:600}
+#promo-banner .banner-close{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);width:1.75rem;height:1.75rem;display:flex;align-items:center;justify-content:center;color:#fff;background:transparent;border:0;cursor:pointer;border-radius:9999px}
+#promo-banner .banner-close:hover{background:rgba(255,255,255,.15)}
+@media (prefers-reduced-motion:reduce){#promo-banner{transition:none}}
+
+/* Shrinking / pill navbar on scroll */
+header nav{transition:all .35s cubic-bezier(.16,1,.3,1)}
+header.nav-shrink nav{max-width:46rem;margin:.5rem auto 0;padding:.5rem 1.25rem;border-radius:9999px;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(15,15,20,.12)}
+html.dark header.nav-shrink nav{background:rgba(14,16,22,.85);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+@media (prefers-reduced-motion:reduce){header nav{transition:none}}
+
+/* Floating dock */
+#floating-dock{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%);z-index:60;display:flex;align-items:flex-end;gap:.75rem;padding:.6rem .9rem;border-radius:9999px;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 32px rgba(15,15,20,.16);border:1px solid rgba(15,15,20,.06)}
+html.dark #floating-dock{background:rgba(14,16,22,.85);border-color:rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+#floating-dock a{position:relative;display:flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:9999px;background:rgba(37,99,235,.08);color:#2563eb;transition:transform .2s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+html.dark #floating-dock a{background:rgba(96,165,250,.14);color:#93c5fd}
+#floating-dock a:hover,#floating-dock a:focus-visible{transform:translateY(-6px) scale(1.12)}
+#floating-dock a .dock-tip{position:absolute;bottom:calc(100% + .5rem);left:50%;transform:translateX(-50%) translateY(4px);white-space:nowrap;font-size:.7rem;font-weight:600;padding:.2rem .5rem;border-radius:.4rem;background:#0e1016;color:#fff;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+#floating-dock a:hover .dock-tip,#floating-dock a:focus-visible .dock-tip{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){#floating-dock a{transition:none}#floating-dock a:hover,#floating-dock a:focus-visible{transform:none}}
+@media (max-width:640px){#floating-dock{gap:.5rem;padding:.5rem .6rem}#floating-dock a{width:2.15rem;height:2.15rem}}
+
+/* Brief multi-step boot loader */
+#boot-loader{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(250,249,246,.97);opacity:1;transition:opacity .4s ease}
+html.dark #boot-loader{background:rgba(10,11,15,.97)}
+#boot-loader.is-hidden{opacity:0;pointer-events:none}
+#boot-loader ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem;font-family:inherit}
+#boot-loader li{display:flex;align-items:center;gap:.6rem;font-size:.95rem;color:#8a8578;opacity:.35;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease,color .3s ease}
+#boot-loader li.is-active{opacity:1;transform:translateY(0);color:#0e1016;font-weight:600}
+html.dark #boot-loader li.is-active{color:#f4f2ec}
+#boot-loader li svg{flex-shrink:0}
+@media (prefers-reduced-motion:reduce){#boot-loader,#boot-loader li{transition:none}}
+
+/* Glowing border effect for dark surfaces */
+.glow-box{position:relative}
+.glow-box::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;opacity:0;pointer-events:none;transition:opacity .3s ease;background:conic-gradient(from calc(var(--glow-angle,0) * 1deg) at 50% 50%,#dd7bbb,#d79f1e,#5a922c,#4c7894,#dd7bbb);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.glow-box.glow-active::after{opacity:1}
+@media (prefers-reduced-motion:reduce){.glow-box::after{display:none}}
+</style>
+<script>
+(function(){
+/* ---- Boot loader (brief, once per session) ---- */
+(function(){
+if(sessionStorage.getItem('omnibot-booted')==='1')return;
+var steps=['Booting up the lab…','Calibrating sensors…','Loading builder profiles…','Ready.'];
+var wrap=document.createElement('div');
+wrap.id='boot-loader';
+var ol=document.createElement('ol');
+steps.forEach(function(text){
+var li=document.createElement('li');
+li.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg><span>'+text+'</span>';
+ol.appendChild(li);
+});
+wrap.appendChild(ol);
+document.body.appendChild(wrap);
+var items=ol.querySelectorAll('li');
+var i=0;
+function step(){
+items.forEach(function(el,idx){el.classList.toggle('is-active',idx===i);});
+i++;
+if(i<items.length){setTimeout(step,260);}
+else{
+setTimeout(function(){
+wrap.classList.add('is-hidden');
+sessionStorage.setItem('omnibot-booted','1');
+setTimeout(function(){wrap.remove();},450);
+},260);
+}
+}
+requestAnimationFrame(step);
+})();
+
+/* ---- Sticky announcement banner ---- */
+function layoutOffsets(){
+var banner=document.getElementById('promo-banner');
+var header=document.querySelector('header');
+var main=document.querySelector('main');
+var h=(banner && banner.isConnected)?banner.offsetHeight:0;
+if(header)header.style.top=h+'px';
+if(main)main.style.marginTop=h+'px';
+}
+function setupBanner(){
+if(document.getElementById('promo-banner'))return;
+if(sessionStorage.getItem('omnibot-banner-dismissed')==='1')return;
+var b=document.createElement('div');
+b.id='promo-banner';
+b.innerHTML='<span>Have questions before enrolling? We\'re just a call away. <a href="mailto:hello@omnibotlabs.com">Get in touch</a></span><button type="button" class="banner-close" aria-label="Dismiss announcement"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>';
+document.body.insertBefore(b,document.body.firstChild);
+requestAnimationFrame(function(){requestAnimationFrame(function(){b.classList.add('is-shown');layoutOffsets();});});
+b.querySelector('.banner-close').addEventListener('click',function(){
+b.classList.remove('is-shown');
+sessionStorage.setItem('omnibot-banner-dismissed','1');
+layoutOffsets();
+setTimeout(function(){b.remove();},350);
+});
+window.addEventListener('resize',layoutOffsets);
+}
+
+/* ---- Shrinking navbar (IntersectionObserver, no scroll listener) ---- */
+function setupShrink(){
+var header=document.querySelector('header');
+if(!header||header.dataset.shrinkSetup)return;
+header.dataset.shrinkSetup='1';
+var sentinel=document.createElement('div');
+sentinel.setAttribute('aria-hidden','true');
+sentinel.style.cssText='position:absolute;top:100px;left:0;width:1px;height:1px;pointer-events:none';
+document.body.insertBefore(sentinel,document.body.firstChild);
+if('IntersectionObserver' in window){
+var io=new IntersectionObserver(function(entries){
+entries.forEach(function(entry){header.classList.toggle('nav-shrink',!entry.isIntersecting);});
+});
+io.observe(sentinel);
+}
+}
+
+/* ---- Rename "Book a demo class" CTA to "Contact Us" ---- */
+function renameCTA(){
+document.querySelectorAll('a[href="signup.html"]').forEach(function(a){
+if(a.textContent.trim()==='Book a demo class'){a.textContent='Contact Us';}
+});
+}
+
+/* ---- Gallery nav link ---- */
+function addGalleryLink(){
+if(document.querySelector('header nav a[href="gallery.html"]'))return;
+var curriculum=document.querySelector('header nav a[href="curriculum.html"]');
+if(curriculum){
+var a=document.createElement('a');
+a.href='gallery.html';
+a.className=curriculum.className;
+a.textContent='Gallery';
+curriculum.insertAdjacentElement('afterend',a);
+}
+}
+
+/* ---- Floating dock ---- */
+function setupDock(){
+if(document.getElementById('floating-dock'))return;
+var links=[
+{title:'Home',href:'index.html',icon:'<path d="m3 9 9-7 9 7"></path><path d="M9 22V12h6v10"></path><path d="M21 22V9"></path><path d="M3 22V9"></path>'},
+{title:'Curriculum',href:'curriculum.html',icon:'<rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path>'},
+{title:'Capstones',href:'capstones.html',icon:'<rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>'},
+{title:'Threads',href:'threads.html',icon:'<path d="M4 17V5a2 2 0 0 1 2-2h8.5L20 7.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M14 3v4a2 2 0 0 0 2 2h4"></path>'},
+{title:'Contact',href:'mailto:hello@omnibotlabs.com',icon:'<rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>'}
+];
+var dock=document.createElement('div');
+dock.id='floating-dock';
+links.forEach(function(l){
+var a=document.createElement('a');
+a.href=l.href;
+a.setAttribute('aria-label',l.title);
+a.innerHTML='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+l.icon+'</svg><span class="dock-tip">'+l.title+'</span>';
+dock.appendChild(a);
+});
+document.body.appendChild(dock);
+}
+
+/* ---- Glow effect on dark CTA surfaces ---- */
+var glowReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function setupGlow(){
+if(glowReduced)return;
+document.querySelectorAll('[class*="bg-ink/40"], [class*="bg-studs-dark"], [class*="bg-ink "], [class$="bg-ink"]').forEach(function(box){
+if(box.dataset.glowTagged)return;
+box.dataset.glowTagged='1';
+box.classList.add('glow-box');
+box.addEventListener('pointermove',function(e){
+var r=box.getBoundingClientRect();
+var cx=r.left+r.width/2,cy=r.top+r.height/2;
+var angle=(Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI)+90;
+box.style.setProperty('--glow-angle',angle.toFixed(1));
+box.classList.add('glow-active');
+});
+box.addEventListener('pointerleave',function(){box.classList.remove('glow-active');});
+});
+}
+
+function scan(){setupBanner();setupShrink();addGalleryLink();setupDock();setupGlow();renameCTA();}
+scan();
+var mo=new MutationObserver(function(){scan();});
+mo.observe(document.body,{childList:true,subtree:true});
+[300,800,1500,3000].forEach(function(ms){setTimeout(scan,ms);});
+})();
+</script>

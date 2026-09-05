@@ -1,0 +1,14 @@
+@media (prefers-color-scheme: dark){
+  html{
+    --color-ink:#f2f2ef;
+    --color-ink-soft:#a9afc0;
+    --color-paper:#13151b;
+    --color-sky:#182236;
+    --color-blue:#5b9bff;
+    --color-coral:#ff7086;
+    --color-amber:#ffc93c;
+    --color-mint:#2be3ab;
+    --color-violet:#a48bff;
+    color-scheme:dark;
+  }
+}
