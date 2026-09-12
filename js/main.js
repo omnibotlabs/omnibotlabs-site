@@ -92,10 +92,13 @@
           if(p.getAttribute('data-grade') === grade){
             p.hidden = false;
             p.style.display = 'block';
+            p.classList.remove('is-visible');
+            void p.offsetWidth; // reflow to trigger buttery-smooth keyframe animation
             p.classList.add('is-visible');
           } else {
             p.hidden = true;
             p.style.display = 'none';
+            p.classList.remove('is-visible');
           }
         });
       });
@@ -115,6 +118,8 @@
 
     var ctx = canvas.getContext('2d');
     var w = 0, h = 0, t = 0;
+    var isHostVisible = true;
+    var animFrame = null;
 
     var lightBlobs = [
       {hex:'#6946F1',cx:.22,cy:.30,r:.42}, // Violet
@@ -133,11 +138,11 @@
 
     function resize(){
       var r = host.getBoundingClientRect();
-      w = canvas.width = Math.max(1, r.width);
-      h = canvas.height = Math.max(1, r.height);
+      w = canvas.width = Math.max(1, Math.min(Math.round(r.width), 1280));
+      h = canvas.height = Math.max(1, Math.min(Math.round(r.height), 800));
     }
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, {passive: true});
 
     function draw(){
       t += isReduced ? 0 : 0.0035;
@@ -161,36 +166,60 @@
         ctx.fill();
       });
 
-      if(!isReduced){
-        requestAnimationFrame(draw);
+      if(!isReduced && isHostVisible){
+        animFrame = requestAnimationFrame(draw);
       }
     }
-    draw();
+
+    if('IntersectionObserver' in window){
+      var heroObs = new IntersectionObserver(function(entries){
+        isHostVisible = entries[0].isIntersecting;
+        if(isHostVisible && !animFrame && !isReduced){
+          draw();
+        } else if(!isHostVisible && animFrame){
+          cancelAnimationFrame(animFrame);
+          animFrame = null;
+        }
+      }, {threshold: 0});
+      heroObs.observe(host);
+    } else {
+      draw();
+    }
   }
 
-  /* ---- 6. Spotlight Card Glow ---- */
+  /* ---- 6. Spotlight Card Glow (RAF-throttled) ---- */
   function initSpotlight(){
     if(isReduced || !canHover) return;
     document.querySelectorAll('.spotlight-card').forEach(function(card){
+      var raf = null;
       card.addEventListener('pointermove', function(e){
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
+        if(raf) return;
+        raf = requestAnimationFrame(function(){
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+          raf = null;
+        });
+      }, {passive: true});
     });
   }
 
-  /* ---- 7. Dark Surfaces Glow Box Effect ---- */
+  /* ---- 7. Dark Surfaces Glow Box Effect (RAF-throttled) ---- */
   function initGlowBox(){
     if(isReduced || !canHover) return;
     document.querySelectorAll('.glow-box').forEach(function(box){
+      var raf = null;
       box.addEventListener('pointermove', function(e){
-        var r = box.getBoundingClientRect();
-        var cx = r.left + r.width/2, cy = r.top + r.height/2;
-        var angle = (Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI) + 90;
-        box.style.setProperty('--glow-angle', angle.toFixed(1));
-        box.classList.add('glow-active');
-      });
+        if(raf) return;
+        raf = requestAnimationFrame(function(){
+          var r = box.getBoundingClientRect();
+          var cx = r.left + r.width/2, cy = r.top + r.height/2;
+          var angle = (Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI) + 90;
+          box.style.setProperty('--glow-angle', angle.toFixed(1));
+          box.classList.add('glow-active');
+          raf = null;
+        });
+      }, {passive: true});
       box.addEventListener('pointerleave', function(){
         box.classList.remove('glow-active');
       });
@@ -210,9 +239,7 @@
     function updateOffsets(){
       var h = b.isConnected ? b.offsetHeight : 0;
       var header = document.querySelector('.site-header');
-      var main = document.querySelector('main');
       if(header) header.style.top = h + 'px';
-      if(main) main.style.paddingTop = (h > 0 ? (h + 16) + 'px' : '');
     }
 
     requestAnimationFrame(function(){
@@ -226,12 +253,10 @@
       b.classList.remove('is-shown');
       sessionStorage.setItem('omnibot-banner-dismissed', '1');
       var header = document.querySelector('.site-header');
-      var main = document.querySelector('main');
       if(header) header.style.top = '0px';
-      if(main) main.style.paddingTop = '';
       setTimeout(function(){ b.remove(); }, 350);
     });
-    window.addEventListener('resize', updateOffsets);
+    window.addEventListener('resize', updateOffsets, {passive: true});
   }
 
   /* ---- 9. Multi-Step Boot Loader ---- */
@@ -376,9 +401,19 @@
       btn.setAttribute('aria-label', 'Open photo: ' + p.caption);
 
       var img = document.createElement('img');
-      img.src = src;
       img.loading = 'lazy';
       img.alt = p.caption;
+      img.onload = function(){
+        img.classList.add('loaded');
+      };
+      img.onerror = function(){
+        img.style.display = 'none';
+        var fallback = document.createElement('div');
+        fallback.style.cssText = 'height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.875rem;padding:1rem;text-align:center;font-family:var(--font-mono);';
+        fallback.textContent = 'Omnibot Workshop';
+        btn.insertBefore(fallback, cap);
+      };
+      img.src = src;
 
       var cap = document.createElement('figcaption');
       cap.textContent = p.caption;
@@ -393,6 +428,10 @@
   /* ---- Initialize everything on DOMContentLoaded ---- */
   document.addEventListener('DOMContentLoaded', function(){
     initTheme();
+    window.addEventListener('storage', function(e){
+      if(e.key === 'omnibot-theme') initTheme();
+    });
+
     document.querySelectorAll('.theme-toggle').forEach(function(btn){
       btn.addEventListener('click', toggleTheme);
     });
